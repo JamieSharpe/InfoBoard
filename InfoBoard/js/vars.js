@@ -1,3 +1,5 @@
+var weatherUpdateFreq = 10000;
+var newsUpdateFreq = 30000;
 var newsCounter = 0;
 var weatherCounter = 0;
 var rss2json = "https://api.rss2json.com/v1/api.json?rss_url=";

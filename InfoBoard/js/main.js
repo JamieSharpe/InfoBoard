@@ -12,8 +12,8 @@ $(window).ready(function () {
     updateNewsFeed();
     updateWeather();
     setInterval(drawClock, 1000);
-    setInterval(updateNewsFeed, 30000);
-    setInterval(updateWeather, 10000);
+    setInterval(updateNewsFeed, newsUpdateFreq);
+    setInterval(updateWeather, weatherUpdateFreq);
 });
 
 
@@ -21,6 +21,7 @@ function drawClock() {
     drawFace(ctx, radius);
     drawNumbers(ctx, radius);
     drawTime(ctx, radius);
+    updateTime();
 }
 
 
@@ -81,13 +82,16 @@ function drawTime(ctx, radius) {
     second = (second * Math.PI / 30);
     drawHand(ctx, second, radius * 0.9, radius * 0.02);
 
+
+}
+
+function updateTime() {
     moment.locale("en-gb");
     var curDay = moment().format('dddd');
     var curDate = moment().format('MMMM Do YYYY');
     var curTime = moment().format('H:mm:ss a');
     $("#curTime")[0].innerText = curDay + "\n" + curDate + "\n" + curTime;
 }
-
 
 function drawHand(ctx, pos, length, width) {
     ctx.beginPath();
@@ -106,7 +110,7 @@ function updateWeather(url) {
         type: 'GET',
         url: rss2json + bbcWeatherDerby[0],
         dataType: 'jsonp',
-        success: function (data) {
+        success: (data) => {
             var weather = data.items[weatherCounter].title;
             weather = weather.replace(/\(.*?\)/g, "");
             weather = weather.replace(", ", "\n");
@@ -114,10 +118,8 @@ function updateWeather(url) {
         }
     });
 
-    weatherCounter++;
-    if (weatherCounter >= 3) {
-        weatherCounter = 0;
-    }
+    // 3 day forecast
+    weatherCounter = (weatherCounter + 1) % 3;
 }
 
 
@@ -126,11 +128,11 @@ function updateNewsFeed(url) {
         type: 'GET',
         url: rss2json + newsSources[newsCounter],
         dataType: 'jsonp',
-        success: function (data) {
+        success: (data) => {
             $("#NewsSource")[0].innerText = data.feed.title;
             var newsID = "#news";
             $(newsID).empty();
-            $.each(data.items, function (index, item) {
+            $.each(data.items, (index, item) => {
                 $("<li/>", {
                     html: `${item.title}`
                 }).appendTo(newsID);
