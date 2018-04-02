@@ -131,7 +131,7 @@ function updateNewsFeed(url) {
         url: rss2json + newsSources[newsCounter],
         dataType: 'jsonp',
         success: (data) => {
-            $("#NewsSource")[0].innerText = data.feed.title;
+            $("#NewsSource")[0].innerText = $('<div/>').html(data.feed.title).text();
             var newsID = "#news";
             $(newsID).empty();
             $.each(data.items, (index, item) => {

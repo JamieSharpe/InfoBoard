@@ -8,5 +8,7 @@ var bbcWeatherDerby = [
 ];
 var newsSources = [
     "http://feeds.bbci.co.uk/news/uk/rss.xml?edition=uk",
-    "http://feeds.bbci.co.uk/news/technology/rss.xml?edtion=uk"
+    "http://feeds.bbci.co.uk/news/technology/rss.xml?edtion=uk",
+    "http://feeds.bbci.co.uk/news/science_and_environment/rss.xml?edtion=uk",
+    "http://feeds.bbci.co.uk/news/world/rss.xml?edtion=uk"
 ];
