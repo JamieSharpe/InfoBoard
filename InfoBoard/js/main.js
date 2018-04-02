@@ -85,15 +85,6 @@ function drawTime(ctx, radius) {
 }
 
 
-function updateTime() {
-    moment.locale("en-gb");
-    var curDay = moment().format('dddd');
-    var curDate = moment().format('MMMM Do YYYY');
-    var curTime = moment().format('H:mm:ss a');
-    $("#curTime")[0].innerText = curDay + "\n" + curDate + "\n" + curTime;
-}
-
-
 function drawHand(ctx, pos, length, width) {
     ctx.beginPath();
     ctx.lineWidth = width;
@@ -103,6 +94,15 @@ function drawHand(ctx, pos, length, width) {
     ctx.lineTo(0, -length);
     ctx.stroke();
     ctx.rotate(-pos);
+}
+
+
+function updateTime() {
+    moment.locale("en-gb");
+    var curDay = moment().format('dddd');
+    var curDate = moment().format('MMMM Do YYYY');
+    var curTime = moment().format('H:mm:ss');
+    $("#curTime")[0].innerText = curDay + "\n" + curDate + "\n" + curTime;
 }
 
 
