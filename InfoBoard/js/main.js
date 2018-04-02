@@ -2,6 +2,7 @@
 var ctx = 0;
 var radius = 0;
 
+
 $(window).ready(function () {
     var canvas = document.getElementById("canvas");
     ctx = canvas.getContext("2d");
@@ -81,9 +82,8 @@ function drawTime(ctx, radius) {
     // second
     second = (second * Math.PI / 30);
     drawHand(ctx, second, radius * 0.9, radius * 0.02);
-
-
 }
+
 
 function updateTime() {
     moment.locale("en-gb");
@@ -92,6 +92,7 @@ function updateTime() {
     var curTime = moment().format('H:mm:ss a');
     $("#curTime")[0].innerText = curDay + "\n" + curDate + "\n" + curTime;
 }
+
 
 function drawHand(ctx, pos, length, width) {
     ctx.beginPath();
@@ -115,11 +116,9 @@ function updateWeather(url) {
             weather = weather.replace(/\(.*?\)/g, "");
             weather = weather.replace(", ", "\n");
             $("#weather")[0].innerText = weather;
+            weatherCounter = (weatherCounter + 1) % data.items.length;
         }
     });
-
-    // 3 day forecast
-    weatherCounter = (weatherCounter + 1) % 3;
 }
 
 
