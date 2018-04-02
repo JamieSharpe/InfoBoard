@@ -115,6 +115,9 @@ function updateWeather(url) {
             var weather = data.items[weatherCounter].title;
             weather = weather.replace(/\(.*?\)/g, "");
             weather = weather.replace(", ", "\n");
+            weather = weather.replace(/°C/g, "°C\n");
+            weather = weather.replace(/imum/g, "");
+            weather = weather.replace(/erature/g, "");
             $("#weather")[0].innerText = weather;
             weatherCounter = (weatherCounter + 1) % data.items.length;
         }
